@@ -11,37 +11,63 @@ using namespace std;
 
 class BubbleSort {
 public:
-    void Ascending(int n, int *arr);
-    void Descending(int n, int *arr);
-    void print(int n, int *arr);
+    BubbleSort();
+    ~BubbleSort();
+    
+    void Ascending();
+    void Descending();
+    void Print();
+    
+private:
+    int n;
+    int *arr;
 };
 
 int main() {
-    BubbleSort sort;
-    int arr[10] = { 1, 10, 5, 8, 7, 6, 4, 3, 2, 9 };
-    sort.Ascending(10, arr);
-    sort.print(10, arr);
-    sort.Descending(10, arr);
-    sort.print(10, arr);
+    BubbleSort *sort = new BubbleSort();
+    sort->Ascending();
+    sort->Print();
+    sort->Descending();
+    sort->Print();
+    delete sort;
 }
 
-void BubbleSort::Ascending(int n, int *arr) {
-    for(int i = 0; i < n; i++) {
-        for(int j = 1; j < n - i; j++) {
-            if(arr[j - 1] > arr[j]) swap(arr[j - 1], arr[j]);
+BubbleSort::BubbleSort() : arr(NULL) {
+    cin >> n;
+    arr = new int[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+}
+
+BubbleSort::~BubbleSort() {
+    delete [] arr;
+    arr = NULL;
+}
+
+void BubbleSort::Ascending() {
+    for (int i = 0; i < n; i++) {
+        for (int j = 1; j < n - i; j++) {
+            if (arr[j - 1] > arr[j]) {
+                swap(arr[j - 1], arr[j]);
+            }
         }
     }
 }
 
-void BubbleSort::Descending(int n, int *arr) {
-    for(int i = 0; i < n; i++) {
-        for(int j = 1; j < n - i; j++) {
-            if(arr[j - 1] < arr[j]) swap(arr[j - 1], arr[j]);
+void BubbleSort::Descending() {
+    for (int i = 0; i < n; i++) {
+        for (int j = 1; j < n - i; j++) {
+            if (arr[j - 1] < arr[j]) {
+                swap(arr[j - 1], arr[j]);
+            }
         }
     }
 }
 
-void BubbleSort::print(int n, int *arr) {
-    for(int i = 0; i < 10; i++) { cout << arr[i] << ' '; }
+void BubbleSort::Print() {
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << ' ';
+    }
     cout << endl;
 }
